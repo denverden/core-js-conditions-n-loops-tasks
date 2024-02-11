@@ -401,8 +401,31 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const RESULT = arr;
+  const PIVOT = arr[arr.length - 1];
+  const LEFT = [];
+  const RIGHT = [];
+
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  for (let i = 0; i < arr.length - 1; i += 1) {
+    if (arr[i] < PIVOT) {
+      LEFT[LEFT.length] = arr[i];
+    } else {
+      RIGHT[RIGHT.length] = arr[i];
+    }
+  }
+
+  const COPY = [...sortByAsc(LEFT), PIVOT, ...sortByAsc(RIGHT)];
+
+  for (let i = 0; i < COPY.length; i += 1) {
+    RESULT[i] = COPY[i];
+  }
+
+  return arr;
 }
 
 /**
